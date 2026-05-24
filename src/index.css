@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 15% 5%, rgba(168, 85, 247, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 95%, rgba(34, 197, 94, 0.08), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05), transparent 60%),
+    #0a0e27;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgba(168, 85, 247, 0.35);
+  color: #fff;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e27;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #A855F7, #06B6D4, #22C55E);
+  border-radius: 8px;
+  border: 2px solid #0a0e27;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c084fc, #22d3ee, #4ade80);
+}
+
+/* ===== Componentes utiles ===== */
+@layer components {
+  .glass {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-800;
+  }
+  .glass-strong {
+    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-800;
+  }
+  .section {
+    @apply scroll-mt-24 py-24 px-6 md:px-12 max-w-7xl mx-auto;
+  }
+  .kicker {
+    @apply font-mono uppercase tracking-[0.25em] text-xs text-cyan-400;
+  }
+  .h-section {
+    @apply text-3xl md:text-5xl font-bold tracking-tight text-slate-50;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-400 via-cyan-400 to-green-400 bg-clip-text text-transparent;
+  }
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.4));
+    border-radius: 1rem;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(6, 182, 212, 0.3), rgba(34, 197, 94, 0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono border;
+  }
+  .chip-crypto {
+    @apply chip border-purple-500/40 bg-purple-500/10 text-purple-300;
+  }
+  .chip-stego {
+    @apply chip border-green-500/40 bg-green-500/10 text-green-300;
+  }
+  .chip-cyber {
+    @apply chip border-cyan-500/40 bg-cyan-500/10 text-cyan-300;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-white
+           bg-gradient-to-r from-purple-600 via-cyan-600 to-green-600 hover:from-purple-500 hover:via-cyan-500 hover:to-green-500
+           transition-all shadow-lg shadow-purple-500/20 hover:shadow-cyan-500/30 hover:scale-[1.02];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-slate-200
+           border border-slate-700 hover:border-cyan-500/50 hover:bg-slate-800/60 transition-all;
+  }
+}
+
+/* Entrada animada cuando un nodo recibe la clase .in-view */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Patron de grid para el hero */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(168, 85, 247, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9), transparent 70%);
+}
+
+/* Linea de scan estilo terminal */
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+.scanline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28%;
+  background: linear-gradient(180deg, transparent, rgba(34, 197, 94, 0.06), transparent);
+  animation: scan 3.5s linear infinite;
+  pointer-events: none;
+}
+@keyframes scan {
+  0% { top: -30%; }
+  100% { top: 130%; }
+}
+
+/* Indicador de progreso de scroll */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #A855F7, #06B6D4, #22C55E);
+  z-index: 100;
+  transition: width 0.1s ease-out;
+}
