@@ -80,14 +80,14 @@ export default function Foundations() {
       <SubTabs tabs={SUB} active={sub} onChange={setSub} ariaLabel="Sub-secciones de Fundamentos" />
 
       {sub === 'def' && (
-        <div className="reveal grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           <ConceptCard accent="crypto" Icon={KeyRound} data={foundations.crypto} mode="def" />
           <ConceptCard accent="stego"  Icon={EyeOff}   data={foundations.stego}  mode="def" />
         </div>
       )}
 
       {sub === 'modelos' && (
-        <div className="reveal grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {theoreticalModels.map((m) => (
             <article
               key={`${m.year}-${m.author}`}
@@ -113,13 +113,13 @@ export default function Foundations() {
       )}
 
       {sub === 'tax-crypto' && (
-        <div className="reveal">
+        <div>
           <ConceptCard accent="crypto" Icon={KeyRound} data={foundations.crypto} mode="tax" />
         </div>
       )}
 
       {sub === 'tax-stego' && (
-        <div className="reveal">
+        <div>
           <ConceptCard accent="stego" Icon={EyeOff} data={foundations.stego} mode="tax" />
         </div>
       )}

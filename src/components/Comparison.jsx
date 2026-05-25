@@ -41,14 +41,14 @@ function ComparisonTable() {
 
   return (
     <>
-      <div className="reveal flex flex-wrap items-center gap-2 mb-6">
+      <div className="flex flex-wrap items-center gap-2 mb-6">
         <span className="text-xs font-mono text-slate-500 mr-2">VISTA:</span>
         <TabBtn value="crypto" icon={KeyRound} color="crypto">Solo Criptografía</TabBtn>
         <TabBtn value="stego"  icon={EyeOff}   color="stego">Solo Esteganografía</TabBtn>
         <TabBtn value="both"   icon={Columns2} color="both">Lado a lado</TabBtn>
       </div>
 
-      <div className="reveal grid gap-3 md:gap-4">
+      <div className="grid gap-3 md:gap-4">
         {comparisonTable.map((row, idx) => {
           const Icon = ICONS[idx % ICONS.length]
           return (
@@ -116,7 +116,7 @@ export default function Comparison() {
       {sub === 'tabla' && <ComparisonTable />}
 
       {sub === 'convergencias' && (
-        <div className="reveal uees-card p-6 md:p-8">
+        <div className="uees-card p-6 md:p-8">
           <p className="kicker mb-3 flex items-center gap-2">
             <BookOpen size={11} /> Por qué son complementarias, no excluyentes
           </p>
@@ -134,7 +134,7 @@ export default function Comparison() {
       )}
 
       {sub === 'quote' && (
-        <blockquote className="reveal uees-card uees-card-featured p-6 md:p-10 max-w-3xl mx-auto">
+        <blockquote className="uees-card uees-card-featured p-6 md:p-10 max-w-3xl mx-auto">
           <Quote size={32} className="text-gold mb-3" />
           <p className="italic text-lg md:text-xl text-slate-100 leading-relaxed">
             “{closingQuote.text}”

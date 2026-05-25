@@ -49,7 +49,7 @@ export default function Attacks() {
       <SubTabs tabs={SUB} active={sub} onChange={setSub} ariaLabel="Sub-secciones de Ataques" />
 
       {sub === 'cripto' && (
-        <div className="reveal glass rounded-2xl p-6 space-y-6">
+        <div className="glass rounded-2xl p-6 space-y-6">
           <div className="flex items-center gap-2 text-purple-300">
             <Sword size={18} />
             <h3 className="font-bold text-lg">Criptoanálisis clásico y moderno</h3>
@@ -88,7 +88,7 @@ export default function Attacks() {
       )}
 
       {sub === 'estego' && (
-        <div className="reveal glass rounded-2xl p-6 space-y-6">
+        <div className="glass rounded-2xl p-6 space-y-6">
           <div className="flex items-center gap-2 text-green-300">
             <ShieldOff size={18} />
             <h3 className="font-bold text-lg">Estegoanálisis</h3>
@@ -108,7 +108,7 @@ export default function Attacks() {
       )}
 
       {sub === 'latam' && (
-        <div className="reveal gradient-border-uees p-6">
+        <div className="gradient-border-uees p-6">
           <div className="flex items-center gap-2 mb-3 text-gold">
             <MapPin size={18} />
             <h3 className="font-bold text-lg">Investigación en LATAM / Ecuador</h3>

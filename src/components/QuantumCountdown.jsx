@@ -58,7 +58,7 @@ export default function QuantumCountdown() {
       <SubTabs tabs={SUB} active={sub} onChange={setSub} ariaLabel="Sub-secciones de Cuántica" />
 
       {sub === 'amenaza' && (
-        <div className="reveal glass rounded-2xl p-6 space-y-5">
+        <div className="glass rounded-2xl p-6 space-y-5">
           <div className="flex items-center gap-2 text-gold">
             <AlertTriangle size={18} />
             <h3 className="font-bold text-lg">Vectores y algoritmos cuánticos</h3>
@@ -85,7 +85,7 @@ export default function QuantumCountdown() {
       )}
 
       {sub === 'countdown' && (
-        <div className="reveal gradient-border-uees p-6 md:p-10 bg-gradient-to-br from-uees/10 via-gold/5 to-cyan-500/5">
+        <div className="gradient-border-uees p-6 md:p-10 bg-gradient-to-br from-uees/10 via-gold/5 to-cyan-500/5">
           <div className="flex items-center justify-center gap-3 mb-2 text-gold">
             <Clock size={18} />
             <p className="kicker">Tiempo restante hasta el 1 de enero de 2030</p>
@@ -107,7 +107,7 @@ export default function QuantumCountdown() {
       )}
 
       {sub === 'algos' && (
-        <div className="reveal grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4">
           {pqcAlgorithms.map((a) => (
             <div key={a.fips} className="uees-card hover:uees-card-featured transition-shadow p-5">
               <div className="flex items-center gap-2 mb-1">

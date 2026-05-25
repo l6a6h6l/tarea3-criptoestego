@@ -63,20 +63,20 @@ export default function Cases() {
       <SubTabs tabs={SUB} active={sub} onChange={setSub} ariaLabel="Sub-secciones de Casos" />
 
       {sub === 'crypto' && (
-        <div className="reveal">
+        <div>
           <Column accent="crypto" icon={KeyRound} title="Criptografía legítima" items={useCases.crypto} />
         </div>
       )}
 
       {sub === 'stego' && (
-        <div className="reveal">
+        <div>
           <Column accent="stego" icon={EyeOff} title="Esteganografía legítima" items={useCases.stego} />
         </div>
       )}
 
       {sub === 'caveat' && (
         <div
-          className="reveal gradient-border p-5 md:p-7 bg-gradient-to-b from-amber-500/10 to-amber-500/0"
+          className="gradient-border p-5 md:p-7 bg-gradient-to-b from-amber-500/10 to-amber-500/0"
           style={{ borderStyle: 'dashed' }}
         >
           <div className="flex items-start gap-3">

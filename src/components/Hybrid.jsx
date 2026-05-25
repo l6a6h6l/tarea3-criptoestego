@@ -35,7 +35,7 @@ export default function Hybrid() {
       <SubTabs tabs={SUB} active={sub} onChange={setSub} ariaLabel="Sub-secciones de Híbrido" />
 
       {sub === 'cascade' && (
-        <div className="reveal grid md:flex md:flex-wrap items-stretch gap-3">
+        <div className="grid md:flex md:flex-wrap items-stretch gap-3">
           {hybrid.cascade.map((s, i) => {
             const Icon = ICONS[s.icon] || FileText
             const isLast = i === hybrid.cascade.length - 1
@@ -61,7 +61,7 @@ export default function Hybrid() {
       )}
 
       {sub === 'schemes' && (
-        <div className="reveal grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {hybrid.schemes.map((s) => (
             <div key={s.name} className="glass rounded-xl p-4 hover:border-gold/40 transition-colors">
               <p className="font-semibold text-slate-100 text-sm">{s.name}</p>
@@ -72,7 +72,7 @@ export default function Hybrid() {
       )}
 
       {sub === 'metrics' && (
-        <div className="reveal grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           {hybrid.metrics.map((m) => (
             <div key={m.name} className="glass rounded-xl p-4 hover:border-gold/40 transition-colors">
               <div className="flex items-baseline justify-between">
@@ -86,7 +86,7 @@ export default function Hybrid() {
       )}
 
       {sub === 'apps' && (
-        <ul className="reveal grid sm:grid-cols-2 gap-3">
+        <ul className="grid sm:grid-cols-2 gap-3">
           {hybrid.applications.map((a) => (
             <li
               key={a}
