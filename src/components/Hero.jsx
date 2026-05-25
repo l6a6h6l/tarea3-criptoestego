@@ -16,7 +16,7 @@ export default function Hero({ setTab }) {
         <div className="reveal flex flex-wrap items-center gap-2 mb-6">
           <span className="chip-gold">
             <GraduationCap size={12} />
-            UEES · {courseInfo.courseName}
+            UEES · Maestría en Ciberseguridad · Protección de Informaciones
           </span>
         </div>
 
@@ -103,7 +103,7 @@ export default function Hero({ setTab }) {
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2 text-slate-300">
                   <BookOpen size={14} className="text-gold mt-0.5" />
-                  <span><strong>Asignatura:</strong> {courseInfo.courseCode} · {courseInfo.courseName}</span>
+                  <span><strong>Asignatura:</strong> {courseInfo.courseName}</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-300">
                   <GraduationCap size={14} className="text-purple-400 mt-0.5" />

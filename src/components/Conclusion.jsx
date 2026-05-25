@@ -50,9 +50,8 @@ export default function Conclusion() {
         </div>
 
         <div className="border-t border-gold/25 mt-8 pt-6 text-xs font-mono text-slate-500 flex flex-wrap gap-x-6 gap-y-1">
-          <span>{courseInfo.courseCode}</span>
           <span>{courseInfo.program}</span>
-          <span>{courseInfo.professor}</span>
+          <span>{courseInfo.courseName}</span>
           <span>{courseInfo.date}</span>
         </div>
       </div>

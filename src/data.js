@@ -1,14 +1,13 @@
 // ============================================================================
-// DATOS DEL PROYECTO - Tarea 3 MACS0530
+// DATOS DEL PROYECTO - Tarea 3
 // Las referencias APA viven en src/components/References.jsx (JSX inline).
 // ============================================================================
 
 export const courseInfo = {
   university: 'Universidad de Especialidades Espíritu Santo (UEES)',
   faculty: 'Facultad de Postgrado',
-  program: 'Maestría en Ciberseguridad (MACS)',
-  courseCode: 'MACS0530',
-  courseName: 'Técnicas de Ciberdefensa y Ciberataque',
+  program: 'Maestría en Ciberseguridad',
+  courseName: 'Protección de Informaciones — Ciberseguridad',
   professor: 'Dr. Jorge Luis Zambrano Martínez, Ph.D.',
   date: 'Mayo 2026',
   location: 'Samborondón – Ecuador',

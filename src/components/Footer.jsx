@@ -1,4 +1,4 @@
-import { Github, GraduationCap, Heart } from 'lucide-react'
+import { GraduationCap, Heart } from 'lucide-react'
 import { courseInfo } from '../data.js'
 
 export default function Footer() {
@@ -10,7 +10,7 @@ export default function Footer() {
         background: 'linear-gradient(180deg, rgba(10,14,39,0.4) 0%, rgba(74,36,56,0.25) 100%)'
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 grid md:grid-cols-3 gap-6 text-sm">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 grid md:grid-cols-2 gap-6 text-sm">
         <div>
           <p className="font-bold text-cream mb-1">
             <span className="gradient-text">crypto</span>
@@ -18,8 +18,8 @@ export default function Footer() {
             <span>stego</span>
           </p>
           <p className="text-cream/70">
-            Sitio interactivo para la Tarea 3 del curso{' '}
-            <span className="font-mono text-gold">{courseInfo.courseCode}</span>.
+            Trabajo grupal desarrollado en la Universidad de Especialidades
+            Espíritu Santo (UEES) como Tarea 3 de la {courseInfo.program}.
           </p>
           <p className="text-cream/50 text-xs mt-2">{courseInfo.university}</p>
         </div>
@@ -29,41 +29,9 @@ export default function Footer() {
             <GraduationCap size={11} /> Curso
           </p>
           <p className="text-cream/85">{courseInfo.courseName}</p>
-          <p className="text-cream/55 text-xs mt-1">{courseInfo.professor}</p>
-          <p className="text-cream/55 text-xs">{courseInfo.date} — {courseInfo.location}</p>
-        </div>
-
-        <div>
-          <p className="kicker mb-2">Enlaces</p>
-          <ul className="space-y-1">
-            {courseInfo.repo && (
-              <li>
-                <a
-                  href={courseInfo.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-gold hover:text-cream transition-colors"
-                >
-                  <Github size={13} /> Código fuente del sitio
-                </a>
-              </li>
-            )}
-            {courseInfo.pdfReport && (
-              <li>
-                <a
-                  href={courseInfo.pdfReport}
-                  className="inline-flex items-center gap-1.5 text-gold hover:text-cream"
-                >
-                  Descargar informe (PDF)
-                </a>
-              </li>
-            )}
-            <li>
-              <a href="#top" className="text-cream/70 hover:text-cream">
-                Volver al inicio
-              </a>
-            </li>
-          </ul>
+          <p className="text-cream/55 text-xs mt-1">
+            {courseInfo.date} — {courseInfo.location}
+          </p>
         </div>
       </div>
 
@@ -71,7 +39,8 @@ export default function Footer() {
         className="border-t py-4 text-center text-xs text-cream/55 font-mono"
         style={{ borderColor: 'rgba(107,56,82,0.40)' }}
       >
-        Construido con React + Vite + Tailwind <Heart size={10} className="inline text-uees mx-1" /> Uso académico — MACS UEES
+        Construido con React + Vite + Tailwind{' '}
+        <Heart size={10} className="inline text-uees mx-1" />
       </div>
     </footer>
   )
