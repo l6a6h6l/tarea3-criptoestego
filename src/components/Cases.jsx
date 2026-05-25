@@ -53,12 +53,10 @@ export default function Cases() {
           Dónde vive <span className="gradient-text">cada técnica</span>
         </h2>
         <p className="text-slate-400 text-lg">
-          Aplicaciones legítimas que validan el rol de ambas disciplinas: desde
-          TLS y Signal hasta watermarking y comunicaciones bajo vigilancia. Los
-          usos ofensivos se documentan en la sección{' '}
-          <a href="#timeline" className="text-gold underline-offset-4 hover:underline">
-            Timeline de stegomalware
-          </a>.
+          Las dos disciplinas en producción: TLS y Signal por un lado;
+          watermarking, autenticación documental y comunicaciones bajo
+          vigilancia por el otro. Los usos ofensivos del stegomalware van en la
+          pestaña Timeline.
         </p>
       </header>
 

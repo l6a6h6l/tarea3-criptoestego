@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Foundations from './components/Foundations.jsx'
@@ -14,20 +14,14 @@ import References from './components/References.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function App() {
-  // Indicador de progreso de scroll en la barra superior
-  useEffect(() => {
-    const onScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight
-      const pct = total > 0 ? (window.scrollY / total) * 100 : 0
-      const bar = document.getElementById('scroll-progress')
-      if (bar) bar.style.width = `${pct}%`
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const [tab, setTab] = useState('inicio')
 
-  // Reveal on-scroll para elementos con clase .reveal
+  // Cambio de tab → vuelve arriba (cada vista arranca desde el top).
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [tab])
+
+  // Re-aplica el reveal-on-scroll cuando entra una vista nueva.
   useEffect(() => {
     const els = document.querySelectorAll('.reveal')
     if (!('IntersectionObserver' in window)) {
@@ -43,28 +37,27 @@ export default function App() {
           }
         })
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     )
     els.forEach((el) => obs.observe(el))
     return () => obs.disconnect()
-  }, [])
+  }, [tab])
 
   return (
     <>
-      <div id="scroll-progress" className="scroll-progress" />
-      <Nav />
-      <main>
-        <Hero />
-        <Foundations />
-        <Comparison />
-        <LSBDemo />
-        <Cases />
-        <Timeline />
-        <Attacks />
-        <QuantumCountdown />
-        <Hybrid />
-        <Conclusion />
-        <References />
+      <Nav tab={tab} setTab={setTab} />
+      <main className="pt-24">
+        {tab === 'inicio'      && <Hero setTab={setTab} />}
+        {tab === 'fundamentos' && <Foundations />}
+        {tab === 'comparativa' && <Comparison />}
+        {tab === 'demolsb'     && <LSBDemo />}
+        {tab === 'casos'       && <Cases />}
+        {tab === 'timeline'    && <Timeline />}
+        {tab === 'ataques'     && <Attacks />}
+        {tab === 'cuantica'    && <QuantumCountdown />}
+        {tab === 'hibrido'     && <Hybrid />}
+        {tab === 'conclusion'  && <Conclusion />}
+        {tab === 'referencias' && <References />}
       </main>
       <Footer />
     </>

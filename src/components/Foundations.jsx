@@ -71,9 +71,9 @@ export default function Foundations() {
           Dos ciencias, <span className="gradient-text">dos garantías</span>
         </h2>
         <p className="text-slate-400 text-lg">
-          La criptografía hace ilegible lo visible. La esteganografía hace
-          invisible lo existente. Sus modelos formales se construyeron en
-          décadas distintas y resuelven problemas ortogonales.
+          La criptografía hace ilegible lo visible; la esteganografía hace
+          invisible lo existente. Sus modelos formales nacieron en décadas
+          distintas y resuelven problemas distintos.
         </p>
       </header>
 

@@ -1,9 +1,9 @@
-import { ArrowDown, GraduationCap, Users, Calendar, MapPin, Github, BookOpen, FileText } from 'lucide-react'
+import { ArrowRight, GraduationCap, Users, Calendar, MapPin, Github, BookOpen, FileText } from 'lucide-react'
 import { courseInfo, tldr, team, heroStats } from '../data.js'
 
-export default function Hero() {
+export default function Hero({ setTab }) {
   return (
-    <section id="top" className="relative pt-32 pb-20 px-6 md:px-12 overflow-hidden">
+    <section className="relative pt-12 pb-20 px-6 md:px-12 overflow-hidden">
       {/* Capa de grid */}
       <div className="absolute inset-0 grid-bg pointer-events-none" />
       {/* Halo institucional UEES */}
@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="reveal flex flex-wrap items-center gap-2 mb-6">
           <span className="chip-gold">
             <GraduationCap size={12} />
-            UEES · MACS0530 · {courseInfo.courseName}
+            UEES · {courseInfo.courseName}
           </span>
         </div>
 
@@ -31,18 +31,18 @@ export default function Hero() {
         </p>
 
         <div className="reveal flex flex-wrap gap-3 mb-12">
-          <a href="#fundamentos" className="btn-primary">
-            Empezar el recorrido <ArrowDown size={16} />
-          </a>
-          <a href="#demo" className="btn-ghost">
-            Probar demo LSB en vivo
-          </a>
-          <a href="#referencias" className="btn-ghost">
-            Ver bibliografía APA 7
-          </a>
+          <button onClick={() => setTab('fundamentos')} className="btn-primary">
+            Empezar el recorrido <ArrowRight size={16} />
+          </button>
+          <button onClick={() => setTab('demolsb')} className="btn-ghost">
+            Probar el demo LSB
+          </button>
+          <button onClick={() => setTab('referencias')} className="btn-ghost">
+            Ver la bibliografía
+          </button>
         </div>
 
-        {/* === 4 Stats doradas === */}
+        {/* 4 stats doradas */}
         <div className="reveal grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-14">
           {heroStats.map((s) => (
             <div
@@ -59,7 +59,7 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* === Equipo de investigación === */}
+        {/* Equipo de investigación */}
         <div className="reveal mb-12">
           <div className="flex items-center gap-2 mb-4">
             <Users size={14} className="text-gold" />
@@ -88,7 +88,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* === Datos del trabajo === */}
+        {/* Datos del trabajo */}
         <div className="reveal gradient-border-uees p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -97,13 +97,13 @@ export default function Hero() {
                 <p className="kicker">Datos del trabajo</p>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-1">
-                Tarea 3 — Investigación comparada
+                Tarea 3 · Investigación comparada
               </h2>
               <p className="text-slate-400 mb-4">{courseInfo.university}</p>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2 text-slate-300">
                   <BookOpen size={14} className="text-gold mt-0.5" />
-                  <span><strong>Asignatura:</strong> {courseInfo.courseCode} — {courseInfo.courseName}</span>
+                  <span><strong>Asignatura:</strong> {courseInfo.courseCode} · {courseInfo.courseName}</span>
                 </li>
                 <li className="flex items-start gap-2 text-slate-300">
                   <GraduationCap size={14} className="text-purple-400 mt-0.5" />

@@ -222,10 +222,17 @@ body {
 }
 
 /* Bibliografía: sangría francesa APA 7 */
-.hanging-indent {
+.hanging-indent p {
   padding-left: 2.5em;
   text-indent: -2.5em;
-  line-height: 1.6;
+  margin-bottom: 0.9em;
+  line-height: 1.65;
+}
+.hanging-indent p:last-child {
+  margin-bottom: 0;
+}
+.hanging-indent a {
+  word-break: break-word;
 }
 
 /* Glow institucional UEES */

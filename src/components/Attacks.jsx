@@ -82,8 +82,7 @@ export default function Attacks() {
           </div>
 
           <p className="text-xs text-slate-500 border-t border-slate-800 pt-3 italic">
-            La amenaza cuántica y los algoritmos PQC se desarrollan en la sección{' '}
-            <a href="#cuantica" className="text-gold hover:underline">Cuántica</a>.
+            La amenaza cuántica y los algoritmos PQC se tratan en la pestaña Cuántica.
           </p>
         </div>
       )}
