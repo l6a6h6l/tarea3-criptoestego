@@ -1,4 +1,4 @@
-import { ArrowRight, GraduationCap, Users, Calendar, MapPin, Github, BookOpen, FileText } from 'lucide-react'
+import { ArrowRight, GraduationCap, Users, Calendar, MapPin, BookOpen, FileText } from 'lucide-react'
 import { courseInfo, tldr, team, heroStats } from '../data.js'
 
 export default function Hero({ setTab }) {
@@ -90,16 +90,20 @@ export default function Hero({ setTab }) {
 
         {/* Datos del trabajo */}
         <div className="reveal gradient-border-uees p-6 md:p-8">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
+          <div className="grid md:grid-cols-3 gap-6 md:gap-10">
+            <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-3">
                 <FileText size={14} className="text-gold" />
                 <p className="kicker">Datos del trabajo</p>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-1">
-                Tarea 3 · Investigación comparada
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-none mb-2">
+                <span className="text-slate-50">crypto</span>
+                <span className="gradient-text">/stego</span>
               </h2>
-              <p className="text-slate-400 mb-4">{courseInfo.university}</p>
+              <p className="text-white/70 text-sm md:text-base mb-3">
+                Investigación comparada · Criptografía y Esteganografía
+              </p>
+              <p className="text-slate-400 text-sm mb-5">{courseInfo.university}</p>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2 text-slate-300">
                   <BookOpen size={14} className="text-gold mt-0.5" />
@@ -127,19 +131,6 @@ export default function Hero({ setTab }) {
               </div>
               <p className="text-slate-200 font-semibold">{courseInfo.program}</p>
               <p className="text-slate-400 text-sm mt-1">{courseInfo.faculty}</p>
-              <div className="mt-5 space-y-2 text-sm">
-                {courseInfo.repo && (
-                  <a
-                    href={courseInfo.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-gold hover:text-cream transition-colors"
-                  >
-                    <Github size={14} />
-                    Repositorio del sitio
-                  </a>
-                )}
-              </div>
             </div>
           </div>
         </div>

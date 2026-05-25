@@ -11,7 +11,6 @@ export const courseInfo = {
   professor: 'Dr. Jorge Luis Zambrano Martínez, Ph.D.',
   date: 'Mayo 2026',
   location: 'Samborondón – Ecuador',
-  repo: 'https://github.com/l6a6h6l/tarea3-criptoestego',
   pdfReport: null // ej: '/informe.pdf' si subes el PDF a /public
 }
 
