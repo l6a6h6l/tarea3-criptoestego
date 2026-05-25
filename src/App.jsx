@@ -21,27 +21,43 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [tab])
 
-  // Re-aplica el reveal-on-scroll cuando entra una vista nueva.
+  // Reveal-on-scroll para .reveal. Usa MutationObserver para registrar
+  // dinamicamente los .reveal que aparecen al cambiar de sub-tab interno
+  // (sin esto, los contenidos condicionales por sub-tab quedan en
+  // opacity: 0 permanente porque nunca se observan).
   useEffect(() => {
-    const els = document.querySelectorAll('.reveal')
     if (!('IntersectionObserver' in window)) {
-      els.forEach((el) => el.classList.add('in-view'))
+      document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in-view'))
       return
     }
-    const obs = new IntersectionObserver(
+    const observed = new WeakSet()
+    const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             e.target.classList.add('in-view')
-            obs.unobserve(e.target)
+            io.unobserve(e.target)
           }
         })
       },
       { threshold: 0.12 }
     )
-    els.forEach((el) => obs.observe(el))
-    return () => obs.disconnect()
-  }, [tab])
+    const observeNew = () => {
+      document.querySelectorAll('.reveal:not(.in-view)').forEach((el) => {
+        if (!observed.has(el)) {
+          observed.add(el)
+          io.observe(el)
+        }
+      })
+    }
+    observeNew()
+    const mo = new MutationObserver(observeNew)
+    mo.observe(document.body, { childList: true, subtree: true })
+    return () => {
+      io.disconnect()
+      mo.disconnect()
+    }
+  }, [])
 
   return (
     <>
