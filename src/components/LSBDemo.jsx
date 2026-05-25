@@ -120,10 +120,10 @@ export default function LSBDemo() {
           <Sparkles size={11} /> Demo interactivo
         </p>
         <h2 className="h-section mb-4">
-          Esteganografia LSB <span className="gradient-text">en vivo</span>
+          Esteganografía LSB <span className="gradient-text">en vivo</span>
         </h2>
         <p className="text-slate-400 text-lg">
-          Escribi un mensaje corto y observa como se altera el bit menos
+          Escribí un mensaje corto y observá cómo se altera el bit menos
           significativo de cada componente RGB. El cambio (1 sobre 256
           niveles) es imperceptible al ojo humano pero recuperable bit a bit.
         </p>
@@ -148,7 +148,7 @@ export default function LSBDemo() {
           </label>
 
           <div>
-            <span className="kicker mb-2 block">Representacion binaria</span>
+            <span className="kicker mb-2 block">Representación binaria</span>
             <div className="font-mono text-[11px] leading-relaxed text-cyan-300 bg-slate-950 border border-slate-800 rounded-lg p-3 max-h-28 overflow-auto break-words">
               {bits.length === 0 ? (
                 <span className="text-slate-600">(vacio)</span>
@@ -180,9 +180,9 @@ export default function LSBDemo() {
           {/* Metricas */}
           {metrics && (
             <div className="border-t border-slate-800 pt-4 space-y-2">
-              <p className="kicker mb-1">Metricas</p>
+              <p className="kicker mb-1">Métricas</p>
               <Metric label="PSNR" value={`${metrics.psnr} dB`} hint="Calidad visual" color="text-green-300" />
-              <Metric label="MSE" value={metrics.mse} hint="Error cuadratico medio" color="text-cyan-300" />
+              <Metric label="MSE" value={metrics.mse} hint="Error cuadrático medio" color="text-cyan-300" />
               <Metric
                 label="Capacidad usada"
                 value={`${metrics.usedPct}%`}
@@ -214,11 +214,11 @@ export default function LSBDemo() {
           <div className="sm:col-span-2 glass rounded-2xl p-4">
             <div className="flex items-center gap-2 mb-3">
               <Play size={14} className="text-cyan-400" />
-              <p className="kicker">Comparacion bit a bit (muestras)</p>
+              <p className="kicker">Comparación bit a bit (muestras)</p>
             </div>
             {sampleChanges.length === 0 ? (
               <p className="text-slate-500 text-sm font-mono">
-                Sin diferencias. Probar con un mensaje mas largo.
+                Sin diferencias. Probá con un mensaje más largo.
               </p>
             ) : (
               <div className="overflow-x-auto">
@@ -228,8 +228,8 @@ export default function LSBDemo() {
                       <th className="text-left py-2 pr-3">Px</th>
                       <th className="text-left py-2 pr-3">Comp.</th>
                       <th className="text-left py-2 pr-3">Antes (bin)</th>
-                      <th className="text-left py-2 pr-3">Despues (bin)</th>
-                      <th className="text-left py-2 pr-3">Delta dec</th>
+                      <th className="text-left py-2 pr-3">Después (bin)</th>
+                      <th className="text-left py-2 pr-3">Δ dec</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -270,11 +270,11 @@ export default function LSBDemo() {
       <div className="reveal mt-6 flex items-start gap-2 text-sm text-slate-400 max-w-3xl">
         <Info size={14} className="mt-0.5 text-cyan-400 shrink-0" />
         <p>
-          <strong className="text-slate-200">Lectura tecnica:</strong> el LSB
-          plano (sin matriz de costos) es vulnerable a chi-cuadrado, RS
-          Analysis y SPAM/SRM. Los esquemas modernos (S-UNIWARD, HILL,
-          MiPod) embeben minimizando una funcion de distorsion sobre
-          syndrome-trellis codes (Filler et al., 2011).
+          <strong className="text-slate-200">Lectura técnica:</strong> el LSB
+          plano (sin matriz de costos) es vulnerable a χ², RS Analysis y
+          SPAM/SRM. Los esquemas modernos (S-UNIWARD, HILL, MiPod) embeben
+          minimizando una función de distorsión sobre syndrome-trellis codes
+          (Filler et al., 2011).
         </p>
       </div>
     </section>

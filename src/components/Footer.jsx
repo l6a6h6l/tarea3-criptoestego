@@ -3,28 +3,34 @@ import { courseInfo } from '../data.js'
 
 export default function Footer() {
   return (
-    <footer className="mt-12 border-t border-slate-800/80 bg-base-900/60 backdrop-blur-xl">
+    <footer
+      className="mt-12 border-t backdrop-blur-xl"
+      style={{
+        borderColor: 'rgba(107,56,82,0.40)',
+        background: 'linear-gradient(180deg, rgba(10,14,39,0.4) 0%, rgba(74,36,56,0.25) 100%)'
+      }}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 grid md:grid-cols-3 gap-6 text-sm">
         <div>
-          <p className="font-bold text-slate-100 mb-1">
+          <p className="font-bold text-cream mb-1">
             <span className="gradient-text">crypto</span>
             <span className="text-slate-500">/</span>
             <span>stego</span>
           </p>
-          <p className="text-slate-400">
+          <p className="text-cream/70">
             Sitio interactivo para la Tarea 3 del curso{' '}
-            <span className="font-mono text-cyan-300">{courseInfo.courseCode}</span>.
+            <span className="font-mono text-gold">{courseInfo.courseCode}</span>.
           </p>
-          <p className="text-slate-500 text-xs mt-2">{courseInfo.university}</p>
+          <p className="text-cream/50 text-xs mt-2">{courseInfo.university}</p>
         </div>
 
         <div>
           <p className="kicker mb-2 flex items-center gap-1.5">
             <GraduationCap size={11} /> Curso
           </p>
-          <p className="text-slate-300">{courseInfo.courseName}</p>
-          <p className="text-slate-500 text-xs mt-1">{courseInfo.professor}</p>
-          <p className="text-slate-500 text-xs">{courseInfo.date} - {courseInfo.location}</p>
+          <p className="text-cream/85">{courseInfo.courseName}</p>
+          <p className="text-cream/55 text-xs mt-1">{courseInfo.professor}</p>
+          <p className="text-cream/55 text-xs">{courseInfo.date} — {courseInfo.location}</p>
         </div>
 
         <div>
@@ -36,9 +42,9 @@ export default function Footer() {
                   href={courseInfo.repo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300"
+                  className="inline-flex items-center gap-1.5 text-gold hover:text-cream transition-colors"
                 >
-                  <Github size={13} /> Codigo fuente del sitio
+                  <Github size={13} /> Código fuente del sitio
                 </a>
               </li>
             )}
@@ -46,14 +52,14 @@ export default function Footer() {
               <li>
                 <a
                   href={courseInfo.pdfReport}
-                  className="inline-flex items-center gap-1.5 text-cyan-400 hover:text-cyan-300"
+                  className="inline-flex items-center gap-1.5 text-gold hover:text-cream"
                 >
                   Descargar informe (PDF)
                 </a>
               </li>
             )}
             <li>
-              <a href="#top" className="text-slate-400 hover:text-slate-200">
+              <a href="#top" className="text-cream/70 hover:text-cream">
                 Volver al inicio
               </a>
             </li>
@@ -61,8 +67,11 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-800/80 py-4 text-center text-xs text-slate-500 font-mono">
-        Construido con React + Vite + Tailwind <Heart size={10} className="inline text-purple-400 mx-1" /> Uso academico - MACS UEES
+      <div
+        className="border-t py-4 text-center text-xs text-cream/55 font-mono"
+        style={{ borderColor: 'rgba(107,56,82,0.40)' }}
+      >
+        Construido con React + Vite + Tailwind <Heart size={10} className="inline text-uees mx-1" /> Uso académico — MACS UEES
       </div>
     </footer>
   )

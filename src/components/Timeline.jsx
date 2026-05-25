@@ -41,8 +41,8 @@ export default function Timeline() {
         </h2>
         <p className="text-slate-400 text-lg">
           12 casos confirmados por firmas como Kaspersky, ESET, Symantec,
-          Dell SecureWorks y Malwarebytes. Filtra por tipo y haz clic para
-          expandir los detalles tecnicos.
+          Dell SecureWorks y Malwarebytes. Filtrá por tipo y hacé clic para
+          expandir los detalles técnicos.
         </p>
       </header>
 
@@ -80,8 +80,8 @@ export default function Timeline() {
               <button
                 key={`${c.name}-${c.year}`}
                 onClick={() => setExpanded(open ? null : `${c.name}-${c.year}`)}
-                className={`scanline glass rounded-xl p-4 text-left transition-all hover:scale-[1.02] hover:border-slate-600 ${
-                  open ? 'ring-2 ring-cyan-500/50' : ''
+                className={`scanline glass rounded-xl p-4 text-left transition-all hover:scale-[1.02] hover:border-gold/40 ${
+                  open ? 'ring-2 ring-gold/60' : ''
                 }`}
               >
                 <div className="flex items-start justify-between gap-2 mb-2">
@@ -147,7 +147,7 @@ function FilterBtn({ active, onClick, children, icon: Icon }) {
       onClick={onClick}
       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-mono border transition-all ${
         active
-          ? 'border-cyan-500/60 bg-cyan-500/10 text-cyan-200'
+          ? 'border-gold/60 bg-gold/15 text-gold'
           : 'border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-600'
       }`}
     >

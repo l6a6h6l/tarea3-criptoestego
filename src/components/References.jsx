@@ -1,50 +1,107 @@
 import { useMemo, useState } from 'react'
-import { BookMarked, Search, ExternalLink, Copy, Check } from 'lucide-react'
-import { referencias } from '../data.js'
+import { BookMarked, Search, ExternalLink, Copy, Check, BookOpen, FileText, Shield, AlertTriangle, MapPin } from 'lucide-react'
+import { referencias, referenceCategories, apaString } from '../data.js'
+import SubTabs from './SubTabs.jsx'
 
-const TAG_COLORS = {
-  fundamentos: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
-  hibrido: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-  iot: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-  malware: 'bg-red-500/10 text-red-300 border-red-500/30',
-  apt: 'bg-red-500/10 text-red-300 border-red-500/30',
-  banking: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
-  crimeware: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
-  'exploit kit': 'bg-orange-500/10 text-orange-300 border-orange-500/30',
-  estegoanalisis: 'bg-green-500/10 text-green-300 border-green-500/30',
-  esteganografia: 'bg-green-500/10 text-green-300 border-green-500/30',
-  adaptativa: 'bg-green-500/10 text-green-300 border-green-500/30',
-  'deep learning': 'bg-purple-500/10 text-purple-300 border-purple-500/30',
-  cuantica: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-  pqc: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-  shor: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
-  signal: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
-  historia: 'bg-slate-500/10 text-slate-300 border-slate-500/30',
-  libro: 'bg-slate-500/10 text-slate-300 border-slate-500/30',
-  latam: 'bg-amber-500/10 text-amber-300 border-amber-500/30'
+const CATEGORY_ICONS = {
+  libros:     BookOpen,
+  seminales:  FileText,
+  estandares: Shield,
+  amenazas:   AlertTriangle,
+  latam:      MapPin
 }
 
-function tagClass(t) {
-  return TAG_COLORS[t] || 'bg-slate-500/10 text-slate-300 border-slate-500/30'
+const REF_BY_ID = Object.fromEntries(referencias.map((r) => [r.id, r]))
+
+function renderParts(parts) {
+  return parts.map((p, i) =>
+    typeof p === 'string' ? (
+      <span key={i}>{p}</span>
+    ) : (
+      <em key={i}>{p.italic}</em>
+    )
+  )
+}
+
+function ReferenceEntry({ entry, copied, onCopy }) {
+  return (
+    <li className="group">
+      <p className="hanging-indent font-serif text-[13px] md:text-sm text-slate-200">
+        {renderParts(entry.parts)}
+        {entry.doi && (
+          <>
+            {' '}
+            <a
+              href={`https://doi.org/${entry.doi}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:underline break-all"
+            >
+              https://doi.org/{entry.doi}
+              <ExternalLink size={10} className="inline ml-1 -mt-0.5" />
+            </a>
+          </>
+        )}
+        {!entry.doi && entry.url && (
+          <>
+            {' '}
+            <a
+              href={entry.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:underline break-all"
+            >
+              {entry.url}
+              <ExternalLink size={10} className="inline ml-1 -mt-0.5" />
+            </a>
+          </>
+        )}
+      </p>
+      <div className="hanging-indent mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <button
+          onClick={() => onCopy(entry)}
+          className="inline-flex items-center gap-1 text-[11px] text-slate-500 hover:text-gold font-mono"
+          title="Copiar referencia APA al portapapeles"
+        >
+          {copied === entry.id ? (
+            <>
+              <Check size={10} className="text-green-400" /> Copiado
+            </>
+          ) : (
+            <>
+              <Copy size={10} /> Copiar APA
+            </>
+          )}
+        </button>
+      </div>
+    </li>
+  )
 }
 
 export default function References() {
+  const [activeCat, setActiveCat] = useState(referenceCategories[0].id)
   const [q, setQ] = useState('')
   const [copied, setCopied] = useState(null)
 
+  const tabs = referenceCategories.map((c) => ({
+    id: c.id,
+    label: `${c.label} (${c.ids.length})`,
+    Icon: CATEGORY_ICONS[c.id]
+  }))
+
+  const cat = referenceCategories.find((c) => c.id === activeCat)
+  const entries = cat ? cat.ids.map((id) => REF_BY_ID[id]).filter(Boolean) : []
+
   const filtered = useMemo(() => {
     const term = q.trim().toLowerCase()
-    if (!term) return referencias
-    return referencias.filter((r) => {
-      const hay = (r.apa + ' ' + (r.tags || []).join(' ')).toLowerCase()
-      return hay.includes(term)
-    })
-  }, [q])
+    if (!term) return entries
+    return entries.filter((e) => apaString(e).toLowerCase().includes(term))
+  }, [entries, q])
 
-  const copy = async (r) => {
+  const copy = async (entry) => {
     try {
-      await navigator.clipboard.writeText(r.apa)
-      setCopied(r.id)
+      await navigator.clipboard.writeText(apaString(entry))
+      setCopied(entry.id)
       setTimeout(() => setCopied(null), 1600)
     } catch {
       /* noop */
@@ -55,17 +112,28 @@ export default function References() {
     <section id="referencias" className="section">
       <header className="reveal mb-8 max-w-3xl">
         <p className="kicker mb-2 flex items-center gap-2">
-          <BookMarked size={11} /> Bibliografia
+          <BookMarked size={11} /> Bibliografía
         </p>
         <h2 className="h-section mb-4">
           Referencias <span className="gradient-text">APA 7</span>
         </h2>
         <p className="text-slate-400 text-lg">
           {referencias.length} referencias indexadas (IEEE, ACM, Springer,
-          NIST, arXiv y reportes industriales de Kaspersky, ESET, Symantec,
-          Dell SecureWorks y Malwarebytes).
+          Cambridge UP, Morgan Kaufmann, CRC Press, NIST, arXiv) y reportes de
+          inteligencia de amenazas (Kaspersky, ESET, Symantec, Dell SecureWorks,
+          Malwarebytes). Formato APA 7 estricto con sangría francesa.
         </p>
       </header>
+
+      <SubTabs
+        tabs={tabs}
+        active={activeCat}
+        onChange={(id) => {
+          setActiveCat(id)
+          setQ('')
+        }}
+        ariaLabel="Categorías de la bibliografía"
+      />
 
       <div className="reveal mb-6 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[260px] max-w-md">
@@ -73,79 +141,34 @@ export default function References() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Buscar por autor, ano, tema o tag..."
-            className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-slate-950 border border-slate-700 focus:border-cyan-500/60 focus:ring-1 focus:ring-cyan-500/40 outline-none text-sm"
+            placeholder="Buscar por autor, año, título…"
+            className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-slate-950 border border-slate-700 focus:border-gold/60 focus:ring-1 focus:ring-gold/40 outline-none text-sm"
           />
         </div>
         <span className="text-xs font-mono text-slate-500">
-          {filtered.length} / {referencias.length}
+          {filtered.length} / {entries.length} en esta categoría
         </span>
       </div>
 
-      <div className="reveal grid md:grid-cols-2 gap-3">
-        {filtered.map((r) => (
-          <article
-            key={r.id}
-            className="glass rounded-xl p-4 hover:border-cyan-500/40 transition-colors group"
-          >
-            <p className="text-sm text-slate-200 leading-relaxed">{r.apa}</p>
-
-            {(r.tags || []).length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2.5">
-                {r.tags.map((t) => (
-                  <span
-                    key={t}
-                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono border ${tagClass(
-                      t
-                    )}`}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className="flex items-center gap-2 mt-3 text-xs">
-              {r.url && (
-                <a
-                  href={r.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300"
-                >
-                  <ExternalLink size={11} /> Enlace
-                </a>
-              )}
-              {r.doi && (
-                <span className="font-mono text-slate-500">
-                  DOI: <span className="text-slate-400">{r.doi}</span>
-                </span>
-              )}
-              <button
-                onClick={() => copy(r)}
-                className="ml-auto inline-flex items-center gap-1 text-slate-400 hover:text-slate-200"
-                title="Copiar cita APA"
-              >
-                {copied === r.id ? (
-                  <>
-                    <Check size={11} className="text-green-400" /> Copiado
-                  </>
-                ) : (
-                  <>
-                    <Copy size={11} /> Copiar APA
-                  </>
-                )}
-              </button>
-            </div>
-          </article>
-        ))}
-
-        {filtered.length === 0 && (
-          <div className="md:col-span-2 text-center py-12 text-slate-500 font-mono text-sm">
-            Sin coincidencias para "{q}"
-          </div>
+      <div className="reveal uees-card p-6 md:p-8">
+        {filtered.length === 0 ? (
+          <p className="text-center py-8 text-slate-500 font-mono text-sm">
+            Sin coincidencias para “{q}” en esta categoría.
+          </p>
+        ) : (
+          <ol className="space-y-5 list-none">
+            {filtered.map((e) => (
+              <ReferenceEntry key={e.id} entry={e} copied={copied} onCopy={copy} />
+            ))}
+          </ol>
         )}
       </div>
+
+      <p className="reveal mt-6 text-xs text-slate-500 italic max-w-3xl">
+        Formato APA 7ma edición. Títulos de revistas y libros en cursiva,
+        volúmenes en cursiva y números entre paréntesis sin cursiva, DOI como
+        hipervínculo completo, sangría francesa de 2.5 em.
+      </p>
     </section>
   )
 }

@@ -1,38 +1,36 @@
-import { ArrowDown, GraduationCap, Users, Calendar, MapPin, Github } from 'lucide-react'
-import { courseInfo, tldr } from '../data.js'
+import { ArrowDown, GraduationCap, Users, Calendar, MapPin, Github, BookOpen, FileText } from 'lucide-react'
+import { courseInfo, tldr, team, heroStats } from '../data.js'
 
 export default function Hero() {
   return (
     <section id="top" className="relative pt-32 pb-20 px-6 md:px-12 overflow-hidden">
       {/* Capa de grid */}
       <div className="absolute inset-0 grid-bg pointer-events-none" />
-      {/* Halos */}
+      {/* Halo institucional UEES */}
+      <div className="absolute inset-0 bg-radial-uees pointer-events-none" />
+      {/* Halos cyber */}
       <div className="absolute top-10 -left-32 h-96 w-96 rounded-full bg-purple-600/20 blur-3xl animate-float pointer-events-none" />
       <div className="absolute bottom-0 -right-32 h-96 w-96 rounded-full bg-green-500/15 blur-3xl animate-float pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">
-        {/* Encabezado academico tipo "portada" */}
         <div className="reveal flex flex-wrap items-center gap-2 mb-6">
-          <span className="chip-cyber">
+          <span className="chip-gold">
             <GraduationCap size={12} />
-            {courseInfo.program}
-          </span>
-          <span className="chip-crypto">
-            {courseInfo.courseCode} - {courseInfo.courseName}
+            UEES · MACS0530 · {courseInfo.courseName}
           </span>
         </div>
 
         <h1 className="reveal text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.95] mb-6">
-          <span className="gradient-text">Criptologia</span>
+          <span className="gradient-text">Criptología</span>
           <span className="text-slate-500"> vs </span>
-          <span className="text-slate-100">Esteganografia</span>
+          <span className="text-slate-100">Esteganografía</span>
         </h1>
 
         <p className="reveal text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed mb-10">
           {tldr}
         </p>
 
-        <div className="reveal flex flex-wrap gap-3 mb-14">
+        <div className="reveal flex flex-wrap gap-3 mb-12">
           <a href="#fundamentos" className="btn-primary">
             Empezar el recorrido <ArrowDown size={16} />
           </a>
@@ -40,70 +38,108 @@ export default function Hero() {
             Probar demo LSB en vivo
           </a>
           <a href="#referencias" className="btn-ghost">
-            Ver referencias APA 7
+            Ver bibliografía APA 7
           </a>
         </div>
 
-        {/* Tarjeta portada */}
-        <div className="reveal gradient-border p-6 md:p-8">
-          <div className="grid md:grid-cols-2 gap-8">
+        {/* === 4 Stats doradas === */}
+        <div className="reveal grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-14">
+          {heroStats.map((s) => (
+            <div
+              key={s.label}
+              className="uees-card p-5 md:p-6 hover:uees-card-featured transition-shadow"
+            >
+              <div className="text-4xl md:text-5xl font-extrabold tracking-tight text-gold tabular-nums">
+                {s.value}
+              </div>
+              <div className="mt-2 text-[11px] md:text-sm text-slate-300/85 leading-snug">
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* === Equipo de investigación === */}
+        <div className="reveal mb-12">
+          <div className="flex items-center gap-2 mb-4">
+            <Users size={14} className="text-gold" />
+            <p className="kicker">Equipo de investigación</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {team.map((m) => (
+              <div
+                key={m.initials}
+                className="uees-card hover:uees-card-featured transition-shadow flex items-center gap-3 px-3 py-3"
+              >
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-white text-sm flex-shrink-0 animate-pulse-uees"
+                  style={{ background: m.color }}
+                  aria-hidden="true"
+                >
+                  {m.initials}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-slate-100 leading-tight truncate">
+                    {m.name}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* === Datos del trabajo === */}
+        <div className="reveal gradient-border-uees p-6 md:p-8">
+          <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p className="kicker mb-3">Portada</p>
+              <div className="flex items-center gap-2 mb-3">
+                <FileText size={14} className="text-gold" />
+                <p className="kicker">Datos del trabajo</p>
+              </div>
               <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-1">
-                Tarea 3 - Investigacion comparada
+                Tarea 3 — Investigación comparada
               </h2>
               <p className="text-slate-400 mb-4">{courseInfo.university}</p>
-              <p className="text-slate-400 text-sm">{courseInfo.faculty}</p>
-              <p className="text-slate-400 text-sm">{courseInfo.program}</p>
-              <div className="mt-5 space-y-1.5 text-sm">
-                <div className="flex items-center gap-2 text-slate-300">
-                  <GraduationCap size={14} className="text-cyan-400" />
-                  <span className="font-medium">{courseInfo.professor}</span>
-                </div>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <Calendar size={14} className="text-purple-400" />
-                  {courseInfo.date}
-                </div>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <MapPin size={14} className="text-green-400" />
-                  {courseInfo.location}
-                </div>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start gap-2 text-slate-300">
+                  <BookOpen size={14} className="text-gold mt-0.5" />
+                  <span><strong>Asignatura:</strong> {courseInfo.courseCode} — {courseInfo.courseName}</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-300">
+                  <GraduationCap size={14} className="text-purple-400 mt-0.5" />
+                  <span><strong>Docente:</strong> {courseInfo.professor}</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-300">
+                  <Calendar size={14} className="text-cyan-400 mt-0.5" />
+                  <span><strong>Fecha:</strong> {courseInfo.date}</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-300">
+                  <MapPin size={14} className="text-green-400 mt-0.5" />
+                  <span><strong>Ubicación:</strong> {courseInfo.location}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Users size={14} className="text-gold" />
+                <p className="kicker">Programa académico</p>
+              </div>
+              <p className="text-slate-200 font-semibold">{courseInfo.program}</p>
+              <p className="text-slate-400 text-sm mt-1">{courseInfo.faculty}</p>
+              <div className="mt-5 space-y-2 text-sm">
                 {courseInfo.repo && (
                   <a
                     href={courseInfo.repo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-300 transition-colors"
+                    className="inline-flex items-center gap-2 text-gold hover:text-cream transition-colors"
                   >
                     <Github size={14} />
                     Repositorio del sitio
                   </a>
                 )}
               </div>
-            </div>
-            <div>
-              <p className="kicker mb-3 flex items-center gap-2">
-                <Users size={12} /> Integrantes
-              </p>
-              <ol className="space-y-2">
-                {courseInfo.team.map((name, i) => (
-                  <li
-                    key={i}
-                    className="flex items-center gap-3 text-slate-200"
-                  >
-                    <span className="font-mono text-xs h-7 w-7 rounded-md bg-slate-800/80 border border-slate-700 flex items-center justify-center text-cyan-300">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <span className={name.startsWith('[') ? 'text-slate-500 italic' : ''}>
-                      {name}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-              <p className="mt-5 text-xs text-slate-500 font-mono leading-relaxed">
-                * Reemplazar los placeholders en <code className="text-cyan-400">src/data.js</code> &gt;{' '}
-                <code className="text-cyan-400">courseInfo.team</code>
-              </p>
             </div>
           </div>
         </div>
